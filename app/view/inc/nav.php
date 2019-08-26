@@ -15,12 +15,32 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Features</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo URLROOT."/user/login"?>">Login</a>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?php
+                    if(getUserSession()!=false):
+                    echo getUserSession()->name;
+                    else:
+                    echo "Members";
+                    endif;
+                    ?>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <?php
+                    if(getUserSession()==false):
+                        ?>
+                    <a class="dropdown-item" href="<?php echo URLROOT."/user/login"?>">Login</a>
+                    <a class="dropdown-item" href="<?php echo URLROOT."/user/register"?>">Register</a>
+                    <?php
+                    else:
+                    ?>
+                    <a class="dropdown-item" href="<?php echo URLROOT."/user/logout"?>">Logout</a>
+                    <?php endif;?>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo URLROOT."/user/register"?>">Register</a>
-            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown link

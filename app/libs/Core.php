@@ -17,8 +17,9 @@ private $param=[];
             {
                 if (file_exists("../app/controller/".ucfirst($arr[0]) . ".php")) {
                     $this->classname = ucfirst($arr[0]);
-
                 }
+                else
+                    require_once "../app/helpers/error.php";
                 unset($arr[0]);
             }
             require_once "../app/controller/".ucfirst($this->classname).".php";

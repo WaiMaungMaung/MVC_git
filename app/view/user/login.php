@@ -1,14 +1,9 @@
 <?php
 
-
-
 require_once APPROOT."/view/inc/header.php";
 require_once APPROOT."/view/inc/nav.php";
 
 ?>
-
-
-
     <div class="container-fluid">
         <div class="container">
             <div class="col-md-8 offset-md-2 my-5">

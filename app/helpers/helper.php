@@ -22,6 +22,17 @@ function flash($name='',$message='')
 function setUserSession($result){
     $_SESSION['current_user']=$result;
 }
+function getUserSession(){
+    if(isset($_SESSION['current_user'])){
+        return $_SESSION['current_user'];
+    }
+    else
+        return false;
+}
 function unsetUserSession(){
-        
+        unset($_SESSION['current_user']);
+}
+
+function redirect($page){
+    header("Location:".$page);
 }

@@ -1,11 +1,10 @@
 <?php
-
+session_start();
 class User extends Controller
 {
     public $userModel;
     public function __construct()
     {
-
         $this->userModel= $this->model("UserModel");
     }
     public function register()
@@ -44,8 +43,6 @@ class User extends Controller
                 }
             }
 
-
-
                 if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['cpassword_err'])) {
                     if ($this->userModel->register($data['name'], $data['email'], $data['password'])) {
                         flash("register_success","Register success!Plz Login");
@@ -58,11 +55,6 @@ class User extends Controller
                     $this->view("user/register", $data);
                     echo "not bak";
                 }
-
-
-
-
-
         }
         else {
             $this->view("user/register");
@@ -78,8 +70,6 @@ class User extends Controller
 
                 "email" => $_POST['email'],
                 "password" => $_POST['password'],
-
-
                 "email_err" => '',
                 "password_err" => ''
 
@@ -92,15 +82,15 @@ class User extends Controller
                 $data['password_err'] = "Password must be supply";
             }
 
-
             if (empty($data['email_err']) && empty($data['password_err'])) {
 
 
                 $match=$this->userModel->checkEmail($data['email'],"n");
 
                 if(password_verify($data["password"],$match->password)){
+                    setUserSession($match);
                     flash("login_success","Success!welcome back sir");
-                    $this->view("home/index");
+                    redirect(URLROOT."/Admin/home");
                     echo"success";
                 }
                 else{
@@ -117,9 +107,12 @@ class User extends Controller
         else {
             $this->view("user/login");
         }
+    }
 
+    public function logout(){
+        unsetUserSession();
     }
     public function index(){
-echo "hello";
+        echo "hello";
     }
 }
